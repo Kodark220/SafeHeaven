@@ -35,37 +35,53 @@ function getGenLayerRpcUrl() {
   return process.env.GENLAYER_RPC_URL ?? "";
 }
 
-async function requestGenLayerRpc<T>(method: string, params: unknown[]): Promise<T> {
-  const rpcUrl = getGenLayerRpcUrl();
+function getStudioRpcUrl() {
+  return process.env.GENLAYER_STUDIO_RPC_URL ?? "";
+}
 
-  if (!rpcUrl) {
-    throw new Error("GENLAYER_RPC_URL is not configured.");
+function getStudioContractAddress() {
+  return process.env.GENLAYER_STUDIO_CONTRACT_ADDRESS ?? "";
+}
+
+async function requestGenLayerRpc<T>(method: string, params: unknown[], rpcUrl?: string): Promise<T> {
+  const url = rpcUrl ?? getGenLayerRpcUrl();
+
+  if (!url) {
+    throw new Error("GenLayer RPC URL is not configured.");
   }
 
-  const response = await fetch(rpcUrl, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: Date.now(),
-      method,
-      params
-    })
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15_000);
 
-  if (!response.ok) {
-    throw new Error(`GenLayer RPC request failed with status ${response.status}.`);
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: Date.now(),
+        method,
+        params
+      }),
+      signal: controller.signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`GenLayer RPC request failed with status ${response.status}.`);
+    }
+
+    const payload = (await response.json()) as { result?: T; error?: { message?: string } };
+
+    if (payload.error) {
+      throw new Error(payload.error.message ?? "GenLayer RPC returned an error.");
+    }
+
+    return payload.result as T;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const payload = (await response.json()) as { result?: T; error?: { message?: string } };
-
-  if (payload.error) {
-    throw new Error(payload.error.message ?? "GenLayer RPC returned an error.");
-  }
-
-  return payload.result as T;
 }
 
 function makeCalldataObject(functionName: string, args: unknown[]) {
@@ -187,14 +203,16 @@ function normalizeVerificationResult(result: unknown): GenLayerVerificationOutco
 }
 
 export function isGenLayerConfigured(): boolean {
-  return Boolean(process.env.GENLAYER_VERIFIER_CONTRACT_ADDRESS && process.env.GENLAYER_RPC_URL);
+  const hasBradbury = Boolean(process.env.GENLAYER_VERIFIER_CONTRACT_ADDRESS && process.env.GENLAYER_RPC_URL);
+  const hasStudio = Boolean(getStudioRpcUrl() && getStudioContractAddress());
+  return hasBradbury || hasStudio;
 }
 
-export async function verifyWithGenLayer(payload: GenLayerVerificationPayload): Promise<GenLayerVerificationOutcome> {
-  if (!isGenLayerConfigured()) {
-    throw new Error("GenLayer verifier is not configured.");
-  }
-
+async function callGenLayerVerifier(
+  payload: GenLayerVerificationPayload,
+  rpcUrl: string,
+  contractAddress: string
+): Promise<GenLayerVerificationOutcome> {
   const functionName = process.env.GENLAYER_VERIFIER_FUNCTION_NAME ?? "verify_submission";
   const encodedData = [
     abi.calldata.encode(makeCalldataObject(functionName, buildArgs(payload)) as unknown as Parameters<typeof abi.calldata.encode>[0]),
@@ -206,17 +224,55 @@ export async function verifyWithGenLayer(payload: GenLayerVerificationPayload): 
   const rawResult = await requestGenLayerRpc<unknown>("gen_call", [
     {
       type: "read",
-      to: process.env.GENLAYER_VERIFIER_CONTRACT_ADDRESS,
+      to: contractAddress,
       from: senderAddress,
       data: serializedData,
       transaction_hash_variant: "latest-nonfinal"
     }
-  ]);
+  ], rpcUrl);
 
   const prefixedResult = extractGenCallResult(rawResult);
   const result = toPlainJson(abi.calldata.decode(fromHex(prefixedResult, "bytes")));
 
   return normalizeVerificationResult(result);
+}
+
+export async function verifyWithGenLayer(payload: GenLayerVerificationPayload): Promise<GenLayerVerificationOutcome> {
+  if (!isGenLayerConfigured()) {
+    throw new Error("GenLayer verifier is not configured (neither Bradbury nor Studio).");
+  }
+
+  const bradburyUrl = getGenLayerRpcUrl();
+  const bradburyContract = process.env.GENLAYER_VERIFIER_CONTRACT_ADDRESS ?? "";
+  const studioUrl = getStudioRpcUrl();
+  const studioContract = getStudioContractAddress();
+
+  // Try Bradbury first
+  if (bradburyUrl && bradburyContract) {
+    try {
+      console.log("[GenLayer] Attempting Bradbury testnet...");
+      const result = await callGenLayerVerifier(payload, bradburyUrl, bradburyContract);
+      console.log(`[GenLayer] Bradbury returned verdict: ${result.verdict}`);
+      return result;
+    } catch (error) {
+      console.warn("[GenLayer] Bradbury failed, checking Studio fallback...", error instanceof Error ? error.message : error);
+    }
+  }
+
+  // Fallback to Studio
+  if (studioUrl && studioContract) {
+    try {
+      console.log("[GenLayer] Falling back to Studio simulator...");
+      const result = await callGenLayerVerifier(payload, studioUrl, studioContract);
+      console.log(`[GenLayer] Studio returned verdict: ${result.verdict}`);
+      return result;
+    } catch (studioError) {
+      console.error("[GenLayer] Studio fallback also failed.", studioError instanceof Error ? studioError.message : studioError);
+      throw studioError;
+    }
+  }
+
+  throw new Error("All GenLayer endpoints exhausted (Bradbury down, Studio not configured).");
 }
 
 export async function getGenLayerTransactionStatus(txId: `0x${string}`) {
