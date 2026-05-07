@@ -1,0 +1,48 @@
+{
+  "name": "arc-verified-escrow-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "prisma:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "contracts:build": "node scripts/contracts/build.mjs",
+    "contracts:build:genlayer": "node scripts/contracts/build-genlayer.mjs",
+    "contracts:lint:arc": "solhint \"contracts/src/**/*.sol\"",
+    "contracts:lint:genlayer": "node scripts/contracts/lint-genlayer.mjs",
+    "contracts:lint": "npm run contracts:lint:arc && npm run contracts:lint:genlayer",
+    "contracts:deploy:arc": "node scripts/contracts/deploy.mjs",
+    "contracts:deploy:genlayer": "node scripts/contracts/deploy-genlayer.mjs",
+    "build": "tsc -p tsconfig.json",
+    "smoke:live": "tsx src/scripts/smokeLiveFlow.ts",
+    "smoke:live:marketplace": "tsx src/scripts/smokeLiveMarketplaceFlow.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@circle-fin/x402-batching": "^3.0.3",
+    "@prisma/client": "^6.6.0",
+    "@x402/core": "^2.11.0",
+    "@x402/evm": "^2.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "genlayer-js": "^0.8.0",
+    "jsonwebtoken": "^9.0.2",
+    "jszip": "^3.10.1",
+    "viem": "^2.28.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.10",
+    "genlayer": "^0.39.0",
+    "prisma": "^6.6.0",
+    "solc": "^0.8.30",
+    "solhint": "^5.0.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

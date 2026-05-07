@@ -1,0 +1,4 @@
+{
+  "entrypoint": "src/__init__.py",
+  "contract": "SubmissionVerifier"
+}

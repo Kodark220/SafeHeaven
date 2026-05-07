@@ -1,0 +1,66 @@
+name: Live Marketplace Smoke
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: live-marketplace-smoke
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: arc_verified_escrow
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d arc_verified_escrow"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/arc_verified_escrow?schema=public
+      CORS_ORIGIN: http://localhost:3000
+      AUTO_APPROVE_CONFIDENCE: "0.86"
+      ARC_RPC_URL: https://rpc.testnet.arc.network
+      ARC_CHAIN_ID: "5042002"
+      GENLAYER_NETWORK: bradbury
+      GENLAYER_RPC_URL: https://rpc-bradbury.genlayer.com
+      GENLAYER_ALLOWED_DOMAINS: github.com,raw.githubusercontent.com,docs.genlayer.com
+      ARC_ESCROW_CONTRACT_ADDRESS: 0x0deb9f404aca9d810fd520234f0a962dd1b74e61
+      GENLAYER_VERIFIER_CONTRACT_ADDRESS: 0xd427aca90744Db395d0026d30DF52b29f3A3591d
+      NANOPAYMENTS_SELLER_ADDRESS: 0x69BCf3e0c2D8595412FcDfc4df6bB44eE795e1C5
+      NANOPAYMENTS_NETWORKS: eip155:5042002
+      NANOPAYMENTS_FACILITATOR_URL: https://gateway-api-testnet.circle.com
+      NANOPAYMENTS_PREMIUM_PREVIEW_PRICE_USD: "0.000001"
+      ARC_RELAYER_PRIVATE_KEY: ${{ secrets.ARC_RELAYER_PRIVATE_KEY }}
+      GENLAYER_PRIVATE_KEY: ${{ secrets.GENLAYER_PRIVATE_KEY }}
+      GENLAYER_ACCOUNT_ADDRESS: ${{ secrets.GENLAYER_ACCOUNT_ADDRESS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply database schema
+        run: npm run db:push
+
+      - name: Build
+        run: npm run build
+
+      - name: Run live marketplace smoke
+        run: npm run smoke:live:marketplace

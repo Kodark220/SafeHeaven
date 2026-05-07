@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: arc-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: arc-db
+          property: connectionString
+      - key: CORS_ORIGIN
+        sync: false # Set this to your frontend URL later
+      - key: ARC_RELAYER_PRIVATE_KEY
+        sync: false
+      - key: GENLAYER_PRIVATE_KEY
+        sync: false
+      - key: GENLAYER_RPC_URL
+        value: https://rpc-bradbury.genlayer.com
+      - key: ARC_ESCROW_CONTRACT_ADDRESS
+        sync: false
+      - key: GENLAYER_VERIFIER_CONTRACT_ADDRESS
+        sync: false
+
+databases:
+  - name: arc-db
+    plan: free
+    databaseName: arc_verified_escrow
+    user: arc_user

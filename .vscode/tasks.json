@@ -1,0 +1,416 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "install integration deps",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install",
+				"viem@^2.28.0",
+				"genlayer-js@^0.8.0",
+				"jsonwebtoken@^9.0.2",
+				"@types/jsonwebtoken@^9.0.9",
+				"--no-audit",
+				"--no-fund"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "repair-backend-deps",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm install --no-audit --no-fund"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "sync-human-backend-db",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run db:push"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-human-backend",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run build"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "generate-prisma-client",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run prisma:generate"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-human-escrow-backend",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run build"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-human-escrow-backend",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run build"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-human-escrow-backend",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run build"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-human-escrow-backend",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm run build"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "install-genlayer-cli-local",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm install -D genlayer"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-import",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account import --name arc-verified-escrow --private-key 0xd94205703d4cbeb380a76ef2c6e58dd40d9b535a9205b03fa7c0ba3bc922cb51 --password ArcVerifiedEscrow!2026 --overwrite"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-show",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account show"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-deploy-bradbury",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- deploy --contract contracts/genlayer/src/__init__.py --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-unlock-help",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account unlock --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-unlock-help-fresh",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account unlock --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-deploy-help-fresh",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- deploy --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-unlock-help-repaired",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account unlock --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-help-after-restore",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-unlock-help-final",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account unlock --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-show-final",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account show"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-deploy-help-final",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- deploy --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-show-post-unlock",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account show"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-help",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-import-help",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account import --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-list",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account list"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-account-show-mywallet",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- account show"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-receipt-help",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- receipt --help"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-receipt-success-tx",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- receipt 0xf341a021538de258b46c0d43f507f41a92e000a9ebce5434d21f8f6c0005370c --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-schema-live-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- schema 0xc6A600e4815dCc45c0E29aF2FDB5F46289582804 --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-receipt-live-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- receipt 0x6462999eb12ab8ce3176da024c4fd3173a9686ed1765fc0ab83a3e4631aa1b5b --rpc https://rpc-bradbury.genlayer.com --status ACCEPTED --retries 3 --interval 1000"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-call-live-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- call 0xc6A600e4815dCc45c0E29aF2FDB5F46289582804 get_config --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-trace-live-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- trace 0x6462999eb12ab8ce3176da024c4fd3173a9686ed1765fc0ab83a3e4631aa1b5b --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-trace-redeploy",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- trace 0x3ea6c0f0d6c3ff4987715c4dbbb82d3e5ca26a76efc115220ae4177c6d50c36c --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-call-redeploy",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- call 0x1e0Ae460C0667cF8D943C1f34125874f2Be757a5 get_config --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-trace-third-deploy",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- trace 0xbc570bbd3ba723fd547b7d11e5568b1a0867a11ddcb0131ebd2c9994c0e515bc --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-call-final-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- call 0xd0B2737E465cab0808E529C2cfF1489Ce85cbbB4 get_config --rpc https://rpc-bradbury.genlayer.com"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "genlayer-receipt-final-verifier",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/d",
+				"/c",
+				"npm exec --yes genlayer -- receipt 0x806b0e42cf1db8fbcb89832b91689df3837569e67908e16c3adfd21c3faf35f4 --rpc https://rpc-bradbury.genlayer.com --status ACCEPTED --retries 3 --interval 1000"
+			],
+			"isBackground": false
+		}
+	]
+}
