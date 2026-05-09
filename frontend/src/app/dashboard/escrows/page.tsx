@@ -6,6 +6,7 @@ import { Plus } from "lucide-react"
 import { useEscrows } from "@/lib/hooks"
 import { EscrowCard } from "@/components/escrow"
 import { EscrowAction } from "@/lib/escrow"
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/ui/motion-wrapper"
 
 export default function EscrowsPage() {
   const { data: escrows, isLoading } = useEscrows()
