@@ -36,7 +36,7 @@ export function LoginContent() {
       setStep("loading")
       
       // Authenticate with selected role
-      await auth.selectRole(role, wallet.address)
+      await auth.selectRole(role, wallet.address ?? undefined)
       
       // Redirect to role dashboard
       router.push(`/dashboard/${role}`)
