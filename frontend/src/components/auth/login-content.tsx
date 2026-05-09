@@ -66,7 +66,7 @@ export function LoginContent() {
               <Shield className="w-6 h-6 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold">Safe Heaven Escrow</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Safe Heaven Escrow</h1>
           <p className="text-muted-foreground">AI-Verified Escrow Platform</p>
         </div>
 

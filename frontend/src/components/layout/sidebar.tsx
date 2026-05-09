@@ -39,7 +39,7 @@ export function Sidebar() {
             <Shield className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-bold font-heading text-white tracking-tight leading-none">Safe Heaven Escrow</h2>
+            <h2 className="text-lg font-extrabold font-heading text-white tracking-tight leading-none">Safe Heaven Escrow</h2>
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">AI Protocol</p>
           </div>
         </div>
