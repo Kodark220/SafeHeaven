@@ -10,14 +10,15 @@ import { useEscrows, useDashboardStats } from "@/lib/hooks"
 import { EscrowStateMachine } from "@/lib/escrow"
 import { StaggerContainer, StaggerItem, FadeIn } from "@/components/ui/motion-wrapper"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/lib/auth"
 
 export default function ClientDashboardPage() {
   const { data: allEscrows } = useEscrows()
   const { data: stats } = useDashboardStats()
+  const { user } = useAuth()
 
-  // Filter escrows for current client
-  const currentUserId = "c1" // Mock - in real app from auth
-  const clientEscrows = allEscrows?.filter(e => e.clientId === currentUserId) || []
+  // Filter escrows for current client using their wallet address
+  const clientEscrows = allEscrows?.filter(e => e.clientId === user?.walletAddress) || []
 
   // Calculate client-specific stats
   const activeEscrows = clientEscrows.filter(e => EscrowStateMachine.isActiveState(e.status)).length
@@ -81,7 +82,7 @@ export default function ClientDashboardPage() {
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
-                <CardTitle className="font-heading text-lg">Active Portfolios</CardTitle>
+                <CardTitle className="font-heading text-lg font-bold text-slate-900">Active Portfolios</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="p-6">
@@ -129,7 +130,7 @@ export default function ClientDashboardPage() {
         <StaggerItem>
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
-              <CardTitle className="font-heading text-lg">Protocol Quick-Access</CardTitle>
+              <CardTitle className="font-heading text-lg font-bold text-slate-900">Protocol Quick-Access</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <StaggerContainer className="space-y-3">

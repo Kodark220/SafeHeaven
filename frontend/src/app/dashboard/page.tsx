@@ -80,7 +80,7 @@ export default function DashboardPage() {
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
               <div className="flex items-center justify-between">
-                <CardTitle className="font-heading text-lg">Live Escrow Stream</CardTitle>
+                <CardTitle className="font-heading text-lg font-bold text-slate-900">Live Escrow Stream</CardTitle>
                 <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-widest border-slate-200">Real-time</Badge>
               </div>
             </CardHeader>
@@ -123,7 +123,7 @@ export default function DashboardPage() {
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-primary" />
-                <CardTitle className="font-heading text-lg">Protocol Ledger</CardTitle>
+                <CardTitle className="font-heading text-lg font-bold text-slate-900">Protocol Ledger</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="p-6">

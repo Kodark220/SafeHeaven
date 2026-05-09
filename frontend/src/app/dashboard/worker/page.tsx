@@ -82,7 +82,7 @@ export default function WorkerDashboardPage() {
         <StaggerItem>
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
-              <CardTitle className="font-heading text-lg">Current Assignments</CardTitle>
+              <CardTitle className="font-heading text-lg font-bold text-slate-900">Current Assignments</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               {workerEscrows.length === 0 ? (
@@ -142,7 +142,7 @@ export default function WorkerDashboardPage() {
         <StaggerItem>
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
             <CardHeader className="bg-slate-50/30 border-b border-border/50">
-              <CardTitle className="font-heading text-lg">Analytic Performance</CardTitle>
+              <CardTitle className="font-heading text-lg font-bold text-slate-900">Analytic Performance</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-3">

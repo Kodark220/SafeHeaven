@@ -25,6 +25,6 @@ export interface AuthState {
 export interface AuthContextType extends AuthState {
   login(user: AuthUser): Promise<void>
   logout(): Promise<void>
-  selectRole(role: UserRole): void
+  selectRole(role: UserRole, walletAddress?: string): void
   updateUser(user: Partial<AuthUser>): void
 }

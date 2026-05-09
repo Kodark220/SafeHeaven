@@ -39,12 +39,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           try {
             const me = await walletMe()
             if (me.actor) {
+              const address = me.auth?.address ?? restoredUser.walletAddress
               setUser({
                 ...restoredUser,
                 id: me.actor.id,
                 name: me.actor.name ?? restoredUser.name,
-                walletAddress: me.auth?.address ?? restoredUser.walletAddress,
+                walletAddress: address,
               })
+              
+              // Check for wallet-specific role
+              const specificRole = localStorage.getItem(`${ROLE_STORAGE_KEY}_${address}`)
+              if (specificRole) {
+                setSelectedRole(specificRole as UserRole)
+              }
             }
           } catch {
             // Token expired — clear
@@ -102,9 +109,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const selectRole = useCallback((role: UserRole) => {
+  const selectRole = useCallback((role: UserRole, walletAddress?: string) => {
     setSelectedRole(role)
-    localStorage.setItem(ROLE_STORAGE_KEY, role)
+    const key = walletAddress ? `${ROLE_STORAGE_KEY}_${walletAddress}` : ROLE_STORAGE_KEY
+    localStorage.setItem(key, role)
+    localStorage.setItem(ROLE_STORAGE_KEY, role) // Fallback
   }, [])
 
   const updateUser = useCallback((updates: Partial<AuthUser>) => {

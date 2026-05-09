@@ -13,7 +13,8 @@ import {
   User,
   Bot,
   Zap,
-  Handshake
+  Handshake,
+  Briefcase
 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -22,6 +23,7 @@ const navigation = [
   { name: "Client Hub", href: "/dashboard/client", icon: User },
   { name: "Worker Hub", href: "/dashboard/worker", icon: Users },
   { name: "Agent Hub", href: "/dashboard/agent", icon: Bot },
+  { name: "Marketplace", href: "/dashboard/marketplace", icon: Briefcase },
   { name: "Escrows", href: "/dashboard/escrows", icon: Handshake },
   { name: "Verify", href: "/verification", icon: Shield },
   { name: "Vault", href: "/wallet", icon: Wallet },
