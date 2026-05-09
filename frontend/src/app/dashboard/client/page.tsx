@@ -30,7 +30,7 @@ export default function ClientDashboardPage() {
       <FadeIn className="flex justify-between items-end border-b border-border/50 pb-6">
         <div>
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Client Portal</p>
-          <h1 className="text-4xl font-bold font-heading">Operations Center</h1>
+          <h1 className="text-4xl font-extrabold font-heading tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Operations Center</h1>
         </div>
         <Link href="/dashboard/escrows/new">
           <Button className="font-bold bg-slate-900 text-white hover:bg-slate-800 rounded-xl px-6 h-11 shadow-lg shadow-slate-200 uppercase tracking-wider text-xs">

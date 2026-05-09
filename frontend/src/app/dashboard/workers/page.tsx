@@ -17,7 +17,7 @@ export default function WorkersPage() {
       <FadeIn className="flex justify-between items-end border-b border-border/50 pb-6">
         <div>
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Network Directory</p>
-          <h1 className="text-4xl font-bold font-heading">Qualified Talent Node</h1>
+          <h1 className="text-4xl font-extrabold font-heading tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Qualified Talent Node</h1>
         </div>
         <div className="flex gap-4">
           <div className="text-right">

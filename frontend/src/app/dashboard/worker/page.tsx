@@ -36,7 +36,7 @@ export default function WorkerDashboardPage() {
       <FadeIn className="flex justify-between items-end border-b border-border/50 pb-6">
         <div>
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Worker Portal</p>
-          <h1 className="text-4xl font-bold font-heading">Service Dashboard</h1>
+          <h1 className="text-4xl font-extrabold font-heading tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Service Dashboard</h1>
         </div>
         <Badge variant="secondary" className="bg-blue-50/50 text-blue-700 border-blue-100 font-bold px-3 py-1 uppercase tracking-tighter text-[10px]">
           Verified Agent Worker

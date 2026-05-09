@@ -22,7 +22,7 @@ export default function DashboardPage() {
     <div className="space-y-10">
       <FadeIn className="flex flex-col gap-2 border-b border-border/50 pb-6">
         <p className="text-xs font-bold text-primary uppercase tracking-widest">Network Overview</p>
-        <h1 className="text-4xl font-bold font-heading text-slate-900">Protocol Dashboard</h1>
+        <h1 className="text-4xl font-extrabold font-heading tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Protocol Dashboard</h1>
         <p className="text-slate-500 max-w-2xl mt-1">
           Real-time monitoring of decentralized escrows, AI-verification nodes, and automated settlement protocols.
         </p>
