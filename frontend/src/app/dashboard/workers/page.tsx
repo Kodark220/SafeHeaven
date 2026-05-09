@@ -3,9 +3,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Bot, User, Star } from "lucide-react"
+import { Bot, User, Star, Loader2 } from "lucide-react"
 import { useWorkers } from "@/lib/hooks"
-import { StaggerContainer, StaggerItem } from "@/components/ui/motion-wrapper"
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/ui/motion-wrapper"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export default function WorkersPage() {
   const { data: workers, isLoading } = useWorkers()
