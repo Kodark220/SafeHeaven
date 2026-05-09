@@ -14,9 +14,9 @@ export default function MarketplacePage() {
   const { data: escrows, isLoading } = useEscrows()
   const [searchTerm, setSearchTerm] = useState("")
 
-  // Filter for open/created escrows that workers can browse
+  // Filter for funded/draft escrows that workers can browse
   const availableEscrows = escrows?.filter(e => 
-    (e.status === "created" || e.status === "open") &&
+    (e.status === "funded" || e.status === "draft") &&
     (e.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
      e.description.toLowerCase().includes(searchTerm.toLowerCase()))
   ) || []
