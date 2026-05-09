@@ -12,7 +12,8 @@ import {
   Wallet,
   User,
   Bot,
-  Zap
+  Zap,
+  Handshake
 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -21,7 +22,7 @@ const navigation = [
   { name: "Client Hub", href: "/dashboard/client", icon: User },
   { name: "Worker Hub", href: "/dashboard/worker", icon: Users },
   { name: "Agent Hub", href: "/dashboard/agent", icon: Bot },
-  { name: "Escrows", href: "/dashboard/escrows", icon: FileText },
+  { name: "Escrows", href: "/dashboard/escrows", icon: Handshake },
   { name: "Verify", href: "/verification", icon: Shield },
   { name: "Vault", href: "/wallet", icon: Wallet },
   { name: "Settings", href: "/settings", icon: Settings },
@@ -35,10 +36,10 @@ export function Sidebar() {
       <div className="flex h-20 items-center px-6 mb-4">
         <div className="flex items-center gap-2.5">
           <div className="h-9 w-9 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-            <Zap className="h-5 w-5 text-white" />
+            <Shield className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-bold font-heading text-white tracking-tight leading-none">Arc Escrow</h2>
+            <h2 className="text-lg font-bold font-heading text-white tracking-tight leading-none">Safe Heaven Escrow</h2>
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">AI Protocol</p>
           </div>
         </div>

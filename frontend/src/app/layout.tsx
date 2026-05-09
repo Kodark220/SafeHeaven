@@ -14,7 +14,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: 'Arc Escrow',
+  title: 'Safe Heaven Escrow',
   description: 'AI-verified escrow platform for human and agent workers',
 }
 
