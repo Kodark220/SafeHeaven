@@ -68,7 +68,7 @@ export function DisputePanel({
           <CardContent className="pt-6 space-y-4">
             <div className="p-5 bg-white/60 border border-emerald-100 rounded-2xl">
               <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-2">Final Resolution Outcome</p>
-              <p className="text-sm text-slate-700 leading-relaxed font-medium italic">"{disputeResolution}"</p>
+              <p className="text-sm text-slate-700 leading-relaxed font-medium italic">&quot;{disputeResolution}&quot;</p>
             </div>
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 font-bold border-emerald-200 px-3">
@@ -100,7 +100,7 @@ export function DisputePanel({
                 </span>
               </div>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Incident Description</p>
-              <p className="text-sm text-slate-800 leading-relaxed font-medium italic">"{disputeReason}"</p>
+              <p className="text-sm text-slate-800 leading-relaxed font-medium italic">&quot;{disputeReason}&quot;</p>
             </div>
 
             {/* Resolution Form for Arbitrators/Admins */}

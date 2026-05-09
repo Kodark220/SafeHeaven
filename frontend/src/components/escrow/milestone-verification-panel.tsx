@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { AlertCircle, CheckCircle, XCircle, AlertTriangle, Music, Image as ImageIcon } from "lucide-react"
+import { AlertCircle, CheckCircle, XCircle, AlertTriangle, Music, Image as ImageIcon, Shield } from "lucide-react"
 import { useState } from "react"
 
 import { motion, AnimatePresence } from "framer-motion"
@@ -165,7 +165,7 @@ export function MilestoneVerificationPanel({
             <div className="space-y-2 border-t pt-4">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Client Feedback</h4>
               <p className="text-sm italic p-3 rounded-xl bg-blue-50/50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
-                "{milestone.clientReviewNotes}"
+                &quot;{milestone.clientReviewNotes}&quot;
               </p>
             </div>
           )}

@@ -147,7 +147,7 @@ export function VerificationPanel({ verifications, escrowId, className }: Verifi
                         </div>
                         {verification.notes && (
                           <p className="text-slate-700 leading-relaxed italic">
-                            "{verification.notes}"
+                            &quot;{verification.notes}&quot;
                           </p>
                         )}
                         <p className="text-[10px] text-blue-400 mt-2 font-bold">
