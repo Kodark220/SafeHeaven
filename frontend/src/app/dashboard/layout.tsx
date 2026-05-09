@@ -1,3 +1,5 @@
+"use client"
+
 import { Sidebar } from "@/components/layout/sidebar"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { ProtectedRoute } from "@/components/route-guards"
