@@ -40,7 +40,7 @@ export function MilestoneVerificationPanel({
     switch (status) {
       case "approved":
         return <CheckCircle className="h-5 w-5 text-green-500" />
-      case "rejected":
+      case "needs_revision":
         return <XCircle className="h-5 w-5 text-red-500" />
       case "disputed":
         return <AlertTriangle className="h-5 w-5 text-orange-500" />
@@ -85,7 +85,7 @@ export function MilestoneVerificationPanel({
       <Card className={`glass-card overflow-hidden ${getStatusGlow(milestone.status)}`}>
         <div className={`h-1.5 w-full ${
           milestone.status === "approved" ? "bg-green-500" : 
-          milestone.status === "rejected" ? "bg-red-500" : 
+          milestone.status === "needs_revision" ? "bg-red-500" : 
           milestone.status === "disputed" ? "bg-orange-500" : "bg-primary"
         }`} />
         <CardHeader>
