@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 import { Loader2, Plus, Trash2, CheckCircle, ArrowRight } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const escrowSchema = z.object({
   title: z.string().min(8, "Add a descriptive title for the escrow"),
