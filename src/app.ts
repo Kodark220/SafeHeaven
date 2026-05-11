@@ -442,6 +442,48 @@ app.post("/jobs", async (request, response) => {
 
   const totalAmountUsd = parsed.data.milestones.reduce((sum, milestone) => sum + milestone.amountUsd, 0);
 
+  // Auto-create profiles if they don't exist — anyone can register
+  const [clientExists, workerExists] = await Promise.all([
+    prisma.actorProfile.findUnique({ where: { id: parsed.data.clientId } }),
+    prisma.actorProfile.findUnique({ where: { id: parsed.data.workerId } }),
+  ]);
+
+  if (!clientExists) {
+    await prisma.actorProfile.create({
+      data: {
+        id: parsed.data.clientId,
+        name: parsed.data.clientId,
+        walletAddress: `wallet_${parsed.data.clientId}`,
+        type: "client",
+        categories: [],
+        completedCount: 0,
+        passRate: 0,
+        onTimeRate: 0,
+        disputeRate: 0,
+        averageRating: 0,
+        totalEarnedUsd: 0,
+      },
+    });
+  }
+
+  if (!workerExists) {
+    await prisma.actorProfile.create({
+      data: {
+        id: parsed.data.workerId,
+        name: parsed.data.workerId,
+        walletAddress: `wallet_${parsed.data.workerId}`,
+        type: "human",
+        categories: [],
+        completedCount: 0,
+        passRate: 0,
+        onTimeRate: 0,
+        disputeRate: 0,
+        averageRating: 0,
+        totalEarnedUsd: 0,
+      },
+    });
+  }
+
   const job = await prisma.job.create({
     data: {
       id: `job_${crypto.randomUUID()}`,
