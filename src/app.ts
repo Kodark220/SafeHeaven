@@ -25,7 +25,14 @@ import { serializeActor, serializeJob, serializeMilestone, serializeNanopayment,
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN ?? true }));
+app.use(cors({
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
+    'https://safe-heaven-sable.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 function serializeBigIntsDeep(value: unknown): unknown {
