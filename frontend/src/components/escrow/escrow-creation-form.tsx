@@ -183,7 +183,7 @@ export function EscrowCreationForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="workerId" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Execution Node (Worker)</Label>
+                <Label htmlFor="workerId" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Worker</Label>
                 <select id="workerId" {...register("workerId")} className="w-full h-12 rounded-xl border border-input bg-background px-3 py-2 text-sm outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none font-medium">
                   <option value="">Select Talent Node</option>
                   {workersQuery.data?.map((worker) => (
