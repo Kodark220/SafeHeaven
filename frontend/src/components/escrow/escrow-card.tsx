@@ -49,16 +49,16 @@ export function EscrowCard({
     <FadeIn>
       <HoverCard>
         <Card className={cn("border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden", className)}>
-          <CardHeader className="bg-slate-50/30 border-b border-border/50 pb-6">
-            <div className="flex justify-between items-start gap-4">
-              <div className="space-y-1">
-                <CardTitle className="text-2xl font-bold font-heading text-slate-900">{escrow.title}</CardTitle>
-                <div className="flex items-center gap-2">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+          <CardHeader className="surface-muted border-b border-border/50 pb-6">
+            <div className="flex flex-wrap justify-between items-start gap-4">
+              <div className="space-y-1 min-w-0">
+                <CardTitle className="text-xl sm:text-2xl font-bold font-heading text-foreground break-words">{escrow.title}</CardTitle>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
                     Protocol ID: {escrow.id}
                   </p>
-                  <div className="h-1 w-1 rounded-full bg-slate-300" />
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                  <div className="h-1 w-1 rounded-full bg-muted-foreground/40" />
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
                     Epoch: {new Date(escrow.createdAt).getFullYear()}
                   </p>
                 </div>
@@ -67,77 +67,77 @@ export function EscrowCard({
             </div>
           </CardHeader>
 
-          <CardContent className="p-8 space-y-10">
+          <CardContent className="card-padding space-y-8 sm:space-y-10">
             {/* Metadata Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               <div className="space-y-1.5">
-                <div className="flex items-center gap-1.5 text-slate-400">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
                   <DollarSign className="h-3 w-3" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Locked Capital</span>
                 </div>
-                <p className="text-2xl font-bold font-heading text-slate-900">
+                <p className="text-xl sm:text-2xl font-bold font-heading text-foreground">
                   ${(escrow.totalAmountUsd || escrow.amount || 0).toLocaleString()}
                 </p>
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex items-center gap-1.5 text-slate-400">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
                   <Calendar className="h-3 w-3" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Activation Date</span>
                 </div>
-                <p className="text-sm font-bold text-slate-700">
+                <p className="text-sm font-bold text-foreground">
                   {new Date(escrow.createdAt).toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })}
                 </p>
               </div>
 
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-1.5 text-slate-400">
+              <div className="space-y-1.5 min-w-0">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
                   <User className="h-3 w-3" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Client Principal</span>
                 </div>
-                <Badge variant="secondary" className="font-mono text-[10px] bg-slate-100 text-slate-600 border-slate-200">
+                <Badge variant="secondary" className="font-mono text-[10px] truncate max-w-full">
                   {escrow.clientId}
                 </Badge>
               </div>
 
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-1.5 text-slate-400">
+              <div className="space-y-1.5 min-w-0">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
                   <Bot className="h-3 w-3" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Worker Node</span>
                 </div>
-                <Badge variant="secondary" className="font-mono text-[10px] bg-slate-100 text-slate-600 border-slate-200">
+                <Badge variant="secondary" className="font-mono text-[10px] truncate max-w-full">
                   {escrow.workerId}
                 </Badge>
               </div>
             </div>
 
             {/* Description Segment */}
-            <div className="p-5 rounded-2xl bg-slate-50/50 border border-slate-100/50">
+            <div className="p-4 sm:p-5 rounded-2xl bg-muted/40 border border-border/50">
               <div className="flex items-center gap-2 mb-3">
-                <FileText className="h-3.5 w-3.5 text-slate-400" />
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Engagement Overview</span>
+                <FileText className="h-3.5 w-3.5 text-muted-foreground" />
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Engagement Overview</span>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed font-medium">
+              <p className="text-sm text-foreground/80 leading-relaxed font-medium">
                 {escrow.description}
               </p>
             </div>
 
             {/* Progress Visualization */}
             <div className="relative group">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-wrap items-end justify-between gap-2 mb-4">
                 <div>
-                  <h4 className="text-sm font-bold font-heading text-slate-900">Milestone Velocity</h4>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
+                  <h4 className="text-sm font-bold font-heading text-foreground">Milestone Velocity</h4>
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-tight mt-0.5">
                     {escrow.totalMilestonesCompleted || 0} OF {escrow.totalMilestones || 0} VERIFIED STAGES
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-3xl font-bold font-heading text-primary leading-none">
+                  <span className="text-2xl sm:text-3xl font-bold font-heading text-primary leading-none">
                     {progress}%
                   </span>
                 </div>
               </div>
-              <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200/50">
+              <div className="h-3 w-full bg-muted rounded-full overflow-hidden border border-border/50">
                 <div
                   className="bg-primary h-full rounded-full transition-all duration-1000 ease-out relative"
                   style={{ width: `${progress}%` }}
@@ -148,28 +148,28 @@ export function EscrowCard({
             </div>
 
             {/* Interactive Status Badges */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {isClient && (
-                <Badge className="bg-blue-600/10 text-blue-700 border-blue-200/50 hover:bg-blue-600/20 font-bold uppercase tracking-tighter text-[9px]">
+                <Badge className="bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20 hover:bg-blue-500/20 font-bold uppercase tracking-tighter text-[9px]">
                   Authorized Principal
                 </Badge>
               )}
               {isWorker && (
-                <Badge className="bg-emerald-600/10 text-emerald-700 border-emerald-200/50 hover:bg-emerald-600/20 font-bold uppercase tracking-tighter text-[9px]">
+                <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20 font-bold uppercase tracking-tighter text-[9px]">
                   Authenticated Provider
                 </Badge>
               )}
-              <Badge variant="outline" className="text-[9px] font-bold text-slate-400 border-slate-200 uppercase tracking-tighter">
+              <Badge variant="outline" className="text-[9px] font-bold text-muted-foreground uppercase tracking-tighter">
                 <Info className="h-2 w-2 mr-1" />
                 AI-Secured
               </Badge>
             </div>
 
-            <div className="space-y-8 pt-4 border-t border-slate-100">
+            <div className="space-y-8 pt-4 border-t border-border/50">
               {/* Conditional Components */}
               {showMilestones && escrow.milestones.length > 0 && (
                 <div className="space-y-4">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Project Roadmap</h4>
+                  <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest px-1">Project Roadmap</h4>
                   <MilestoneTimeline milestones={escrow.milestones} />
                 </div>
               )}

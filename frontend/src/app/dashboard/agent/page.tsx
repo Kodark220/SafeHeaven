@@ -30,15 +30,18 @@ export default function AgentDashboardPage() {
   const automationRate = 95 // Mock - percentage of automated work
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold font-heading">AI Agent Dashboard</h1>
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="bg-purple-50 text-purple-700">
+    <div className="space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 border-b border-border/50 pb-6">
+        <div>
+          <p className="eyebrow mb-1">Autonomous Layer</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold gradient-heading">AI Agent Dashboard</h1>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge variant="secondary" className="bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20">
             <Bot className="h-3 w-3 mr-1" />
             AI Agent Active
           </Badge>
-          <Badge variant="outline" className="border-green-300 text-green-700">
+          <Badge variant="outline" className="border-emerald-500/30 text-emerald-700 dark:text-emerald-400 bg-emerald-500/10">
             <Zap className="h-3 w-3 mr-1" />
             Auto-processing
           </Badge>
@@ -80,28 +83,28 @@ export default function AgentDashboardPage() {
         </StaggerItem>
       </StaggerContainer>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="font-heading">Agent Operations</CardTitle>
           </CardHeader>
           <CardContent>
             {agentEscrows.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <Bot className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+              <div className="text-center py-8 text-muted-foreground">
+                <Bot className="h-12 w-12 mx-auto mb-4 opacity-30" />
                 <p>No active operations</p>
                 <p className="text-sm">New escrows will be automatically processed</p>
               </div>
             ) : (
               <StaggerContainer className="space-y-4">
                 {agentEscrows.slice(0, 3).map((escrow) => (
-                  <StaggerItem key={escrow.id} className="flex items-center justify-between p-4 border rounded-xl hover:bg-slate-50/50 transition-colors bg-card">
-                    <div>
-                      <p className="font-medium">{escrow.title}</p>
-                      <p className="text-sm text-muted-foreground">
+                  <StaggerItem key={escrow.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 border border-border/50 rounded-xl hover:bg-accent/40 transition-colors bg-muted/30">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-foreground truncate">{escrow.title}</p>
+                      <p className="text-sm text-muted-foreground truncate">
                         Client: {escrow.clientId}
                       </p>
-                      <div className="flex items-center gap-2 mt-2">
+                      <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Badge
                           variant={
                             escrow.status === "in_progress"
@@ -116,7 +119,7 @@ export default function AgentDashboardPage() {
                           {escrow.status.replace("_", " ")}
                         </Badge>
                         {escrow.status === "in_progress" && (
-                          <Badge variant="outline" className="border-blue-300 text-blue-700">
+                          <Badge variant="outline" className="border-blue-500/30 text-blue-700 dark:text-blue-400 bg-blue-500/10">
                             <Zap className="h-3 w-3 mr-1" />
                             Processing
                           </Badge>
@@ -126,12 +129,12 @@ export default function AgentDashboardPage() {
                         Milestones: {escrow.totalMilestonesCompleted}/{escrow.totalMilestones}
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="sm:text-right shrink-0">
                       <div className="text-sm font-medium font-heading text-primary">
                         ${(escrow.totalAmountUsd || escrow.amount || 0).toLocaleString()}
                       </div>
                       {escrow.status === "in_progress" && (
-                        <div className="text-xs text-blue-600 mt-1">
+                        <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
                           Auto-processing active
                         </div>
                       )}
@@ -148,37 +151,37 @@ export default function AgentDashboardPage() {
             <CardTitle className="font-heading">AI Performance Metrics</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                <span className="text-sm font-medium">Automation Rate</span>
-                <span className="text-lg font-bold text-purple-600 font-heading">{automationRate}%</span>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium text-muted-foreground">Automation Rate</span>
+                <span className="text-lg font-bold text-purple-600 dark:text-purple-400 font-heading">{automationRate}%</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                <span className="text-sm font-medium">Avg. Verification Score</span>
-                <span className="text-lg font-bold text-blue-600 font-heading">
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium text-muted-foreground">Avg. Verification Score</span>
+                <span className="text-lg font-bold text-blue-600 dark:text-blue-400 font-heading">
                   {Math.round(avgVerificationScore * 100)}%
                 </span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                <span className="text-sm font-medium">Tasks Completed</span>
-                <span className="text-lg font-bold font-heading">{completedJobs}</span>
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium text-muted-foreground">Tasks Completed</span>
+                <span className="text-lg font-bold text-foreground font-heading">{completedJobs}</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                <span className="text-sm font-medium">Processing Speed</span>
-                <span className="text-lg font-bold text-green-600 font-heading">2.3s avg</span>
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium text-muted-foreground">Processing Speed</span>
+                <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-heading">2.3s avg</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                <span className="text-sm font-medium">Error Rate</span>
-                <span className="text-lg font-bold text-red-600 font-heading">0.1%</span>
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium text-muted-foreground">Error Rate</span>
+                <span className="text-lg font-bold text-rose-600 dark:text-rose-400 font-heading">0.1%</span>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-blue-50/80 rounded-lg border border-blue-100">
+            <div className="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
               <div className="flex items-center gap-2 mb-2">
-                <Bot className="h-5 w-5 text-blue-600" />
-                <span className="font-medium text-blue-800">Agent Status</span>
+                <Bot className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <span className="font-medium text-blue-900 dark:text-blue-200">Agent Status</span>
               </div>
-              <p className="text-sm text-blue-700 leading-relaxed">
+              <p className="text-sm text-blue-800 dark:text-blue-300 leading-relaxed">
                 AI agent is online and processing tasks autonomously.
                 All verifications are handled automatically with 95%+ accuracy.
               </p>

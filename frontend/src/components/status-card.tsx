@@ -13,10 +13,10 @@ interface StatusCardProps {
 
 export function StatusCard({ title, value, status = "pending", icon }: StatusCardProps) {
   const statusConfig = {
-    success: { icon: CheckCircle, color: "text-green-600", bg: "bg-green-100 dark:bg-green-900" },
-    warning: { icon: AlertTriangle, color: "text-yellow-600", bg: "bg-yellow-100 dark:bg-yellow-900" },
-    error: { icon: XCircle, color: "text-red-600", bg: "bg-red-100 dark:bg-red-900" },
-    pending: { icon: Clock, color: "text-blue-600", bg: "bg-blue-100 dark:bg-blue-900" },
+    success: { icon: CheckCircle, color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-500/10 dark:bg-emerald-950/30" },
+    warning: { icon: AlertTriangle, color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500/10 dark:bg-amber-950/30" },
+    error: { icon: XCircle, color: "text-rose-600 dark:text-rose-400", bg: "bg-rose-500/10 dark:bg-rose-950/30" },
+    pending: { icon: Clock, color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500/10 dark:bg-blue-950/30" },
   }
 
   const config = statusConfig[status]

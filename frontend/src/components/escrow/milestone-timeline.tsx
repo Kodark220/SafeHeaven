@@ -25,7 +25,7 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
       case "needs_revision":
         return <AlertCircle className="h-5 w-5 text-rose-500" />
       default:
-        return <Circle className="h-5 w-5 text-slate-300" />
+        return <Circle className="h-5 w-5 text-muted-foreground/50" />
     }
   }
 
@@ -33,15 +33,15 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
     switch (status) {
       case "approved":
       case "released":
-        return "text-emerald-700 bg-emerald-50 border-emerald-200"
+        return "text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
       case "awaiting_submission":
       case "under_verification":
-        return "text-blue-700 bg-blue-50 border-blue-200"
+        return "text-blue-700 dark:text-blue-400 bg-blue-500/10 border-blue-500/20"
       case "disputed":
       case "needs_revision":
-        return "text-rose-700 bg-rose-50 border-rose-200"
+        return "text-rose-700 dark:text-rose-400 bg-rose-500/10 border-rose-500/20"
       default:
-        return "text-slate-600 bg-slate-50 border-slate-200"
+        return "text-muted-foreground bg-muted border-border"
     }
   }
 
@@ -49,7 +49,7 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
 
   return (
     <Card className={cn("border-border/50 bg-card/50 backdrop-blur-sm", className)}>
-      <CardHeader className="border-b border-border/50 bg-slate-50/30">
+      <CardHeader className="border-b border-border/50 surface-muted">
         <CardTitle className="text-lg flex items-center gap-2 font-heading">
           <MapPin className="h-5 w-5 text-primary" />
           Project Roadmap
@@ -63,27 +63,27 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
               {index < sortedMilestones.length - 1 && (
                 <div className={cn(
                   "absolute left-[19px] top-10 w-[2px] h-full",
-                  (milestone.status === "approved" || milestone.status === "released") 
-                    ? "bg-emerald-200" 
-                    : "bg-slate-200"
+                  (milestone.status === "approved" || milestone.status === "released")
+                    ? "bg-emerald-500/30"
+                    : "bg-border"
                 )} />
               )}
 
               {/* Timeline Icon */}
               <div className={cn(
-                "absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full border-2 bg-white z-10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md",
-                (milestone.status === "approved" || milestone.status === "released") ? "border-emerald-200" : "border-slate-200"
+                "absolute left-0 top-0 flex items-center justify-center w-10 h-10 rounded-full border-2 bg-background z-10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md",
+                (milestone.status === "approved" || milestone.status === "released") ? "border-emerald-500/40" : "border-border"
               )}>
                 {getMilestoneIcon(milestone.status)}
               </div>
 
-              <div className="bg-white/40 border border-border/50 rounded-2xl p-5 transition-all duration-300 group-hover:bg-white group-hover:shadow-sm">
+              <div className="bg-muted/30 border border-border/50 rounded-2xl p-4 sm:p-5 transition-all duration-300 group-hover:bg-accent/40 group-hover:shadow-sm">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div>
-                    <h4 className="text-base font-bold text-slate-900 font-heading">
+                  <div className="min-w-0">
+                    <h4 className="text-base font-bold text-foreground font-heading break-words">
                       {milestone.title}
                     </h4>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-2 mt-1">
                       <span className="text-xs font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-full">
                         PHASE {index + 1}
                       </span>
@@ -95,25 +95,25 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
                       </Badge>
                     </div>
                   </div>
-                  <div className="text-left sm:text-right">
-                    <p className="text-lg font-bold text-slate-900 font-heading">
+                  <div className="text-left sm:text-right shrink-0">
+                    <p className="text-lg font-bold text-foreground font-heading">
                       ${(milestone.amount || milestone.amountUsd || 0).toLocaleString()}
                     </p>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">
                       DUE {new Date(milestone.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }).toUpperCase()}
                     </p>
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-600 mt-3 leading-relaxed">
+                <p className="text-sm text-foreground/80 mt-3 leading-relaxed">
                   {milestone.description}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 mt-4 pt-4 border-t border-slate-100">
+                <div className="flex flex-wrap items-center gap-4 mt-4 pt-4 border-t border-border/50">
                   {milestone.completedAt && (
                     <div className="flex items-center gap-1.5">
                       <CheckCircle className="h-3 w-3 text-emerald-500" />
-                      <span className="text-[10px] font-bold text-emerald-600 uppercase">
+                      <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 uppercase">
                         COMPLETED {new Date(milestone.completedAt).toLocaleDateString().toUpperCase()}
                       </span>
                     </div>
@@ -125,7 +125,7 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
                       rel="noopener noreferrer"
                       className="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest flex items-center gap-1 group/link"
                     >
-                      View Deliverables 
+                      View Deliverables
                       <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                     </a>
                   )}
@@ -136,8 +136,8 @@ export function MilestoneTimeline({ milestones, className }: MilestoneTimelinePr
         </StaggerContainer>
 
         {sortedMilestones.length === 0 && (
-          <FadeIn className="text-center py-12 text-slate-500">
-            <MapPin className="h-12 w-12 mx-auto mb-4 text-slate-200" />
+          <FadeIn className="text-center py-12 text-muted-foreground">
+            <MapPin className="h-12 w-12 mx-auto mb-4 opacity-30" />
             <p className="font-bold font-heading">No Milestones Defined</p>
             <p className="text-sm mt-1">This project roadmap is currently empty.</p>
           </FadeIn>

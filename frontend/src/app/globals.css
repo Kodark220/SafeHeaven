@@ -78,4 +78,29 @@
   .glow-success {
     @apply after:bg-green-500/30;
   }
+
+  .gradient-heading {
+    @apply bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent;
+  }
+
+  .surface-muted {
+    @apply bg-muted/40 dark:bg-muted/20;
+  }
+
+  .card-padding {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold text-primary uppercase tracking-widest;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading tracking-tight;
+  }
 }

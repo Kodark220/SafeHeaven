@@ -33,12 +33,12 @@ export default function WorkerDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <FadeIn className="flex justify-between items-end border-b border-border/50 pb-6">
+      <FadeIn className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 border-b border-border/50 pb-6">
         <div>
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1">Worker Portal</p>
-          <h1 className="text-4xl font-extrabold font-heading tracking-tight bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">Service Dashboard</h1>
+          <p className="eyebrow mb-1">Worker Portal</p>
+          <h1 className="text-3xl sm:text-4xl font-extrabold gradient-heading">Service Dashboard</h1>
         </div>
-        <Badge variant="secondary" className="bg-blue-50/50 text-blue-700 border-blue-100 font-bold px-3 py-1 uppercase tracking-tighter text-[10px]">
+        <Badge variant="secondary" className="bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20 font-bold px-3 py-1 uppercase tracking-tighter text-[10px] self-start sm:self-auto">
           Verified Agent Worker
         </Badge>
       </FadeIn>
@@ -81,53 +81,53 @@ export default function WorkerDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-8">
         <StaggerItem>
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
-            <CardHeader className="bg-slate-50/30 border-b border-border/50">
-              <CardTitle className="font-heading text-lg font-bold text-slate-900">Current Assignments</CardTitle>
+            <CardHeader className="surface-muted border-b border-border/50">
+              <CardTitle className="font-heading text-lg font-bold text-foreground">Current Assignments</CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               {workerEscrows.length === 0 ? (
-                <div className="text-center py-12 text-slate-400">
-                  <Users className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                <div className="text-center py-12 text-muted-foreground">
+                  <Users className="h-12 w-12 mx-auto mb-4 opacity-30" />
                   <p className="font-medium">No active job assignments</p>
                 </div>
               ) : (
                 <StaggerContainer className="space-y-4">
                   {workerEscrows.slice(0, 4).map((escrow) => (
-                    <StaggerItem key={escrow.id} className="group flex items-center justify-between p-5 bg-white/40 border border-border/50 rounded-2xl hover:bg-white transition-all duration-300 hover:shadow-md">
-                      <div className="space-y-1">
-                        <p className="font-bold text-slate-900 font-heading leading-tight">{escrow.title}</p>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                    <StaggerItem key={escrow.id} className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 sm:p-5 bg-muted/30 border border-border/50 rounded-2xl hover:bg-accent/40 transition-all duration-300 hover:shadow-md">
+                      <div className="space-y-1 min-w-0 flex-1">
+                        <p className="font-bold text-foreground font-heading leading-tight truncate">{escrow.title}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter truncate">
                           CLIENT: {escrow.clientId}
                         </p>
-                        <div className="flex items-center gap-2 mt-3">
+                        <div className="flex flex-wrap items-center gap-2 mt-3">
                           <Badge
                             variant="outline"
                             className={cn(
                               "text-[10px] font-bold uppercase tracking-tight py-0 px-2 h-5",
-                              escrow.status === "in_progress" ? "border-emerald-200 text-emerald-700 bg-emerald-50/50" : "border-slate-200 text-slate-500"
+                              escrow.status === "in_progress" ? "border-emerald-500/30 text-emerald-700 dark:text-emerald-400 bg-emerald-500/10" : "text-muted-foreground"
                             )}
                           >
                             {escrow.status.replace("_", " ")}
                           </Badge>
-                          <span className="text-sm font-bold font-heading text-primary ml-1">
+                          <span className="text-sm font-bold font-heading text-primary">
                             ${(escrow.totalAmountUsd || escrow.amount || 0).toLocaleString()}
                           </span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end gap-2">
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 shrink-0">
                         {escrow.status === "funded" ? (
-                          <Button size="sm" className="bg-slate-900 text-white hover:bg-slate-800 rounded-xl px-4 font-bold text-xs uppercase tracking-widest">
+                          <Button size="sm" className="rounded-xl px-4 font-bold text-xs uppercase tracking-widest">
                             <Play className="h-3 w-3 mr-2" />
                             START
                           </Button>
                         ) : (
                           <Link href="/verification">
-                            <Button size="sm" variant="outline" className="rounded-xl px-4 font-bold text-xs uppercase tracking-widest border-slate-200">
+                            <Button size="sm" variant="outline" className="rounded-xl px-4 font-bold text-xs uppercase tracking-widest">
                               SUBMIT PROOF
                             </Button>
                           </Link>
                         )}
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                           STEP {escrow.totalMilestonesCompleted}/{escrow.totalMilestones}
                         </span>
                       </div>
@@ -141,26 +141,26 @@ export default function WorkerDashboardPage() {
 
         <StaggerItem>
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
-            <CardHeader className="bg-slate-50/30 border-b border-border/50">
-              <CardTitle className="font-heading text-lg font-bold text-slate-900">Analytic Performance</CardTitle>
+            <CardHeader className="surface-muted border-b border-border/50">
+              <CardTitle className="font-heading text-lg font-bold text-foreground">Analytic Performance</CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-4 bg-white/40 border border-border/50 rounded-2xl group hover:bg-white transition-all">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Protocol Success</span>
-                  <span className="text-xl font-bold text-emerald-600 font-heading">98.4%</span>
+                <div className="flex items-center justify-between p-4 bg-muted/30 border border-border/50 rounded-2xl hover:bg-accent/40 transition-all">
+                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Protocol Success</span>
+                  <span className="text-xl font-bold text-emerald-600 dark:text-emerald-400 font-heading">98.4%</span>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-white/40 border border-border/50 rounded-2xl group hover:bg-white transition-all">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Avg. Confidence</span>
-                  <span className="text-xl font-bold text-blue-600 font-heading">
+                <div className="flex items-center justify-between p-4 bg-muted/30 border border-border/50 rounded-2xl hover:bg-accent/40 transition-all">
+                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Avg. Confidence</span>
+                  <span className="text-xl font-bold text-blue-600 dark:text-blue-400 font-heading">
                     {stats?.averageVerificationScore ? Math.round(stats.averageVerificationScore * 100) : 0}%
                   </span>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-white/40 border border-border/50 rounded-2xl group hover:bg-white transition-all">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Epoch Total</span>
-                  <span className="text-xl font-bold text-slate-900 font-heading">{workerEscrows.length} Jobs</span>
+                <div className="flex items-center justify-between p-4 bg-muted/30 border border-border/50 rounded-2xl hover:bg-accent/40 transition-all">
+                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Epoch Total</span>
+                  <span className="text-xl font-bold text-foreground font-heading">{workerEscrows.length} Jobs</span>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-slate-900 text-white rounded-2xl shadow-lg shadow-slate-200 mt-6 group overflow-hidden relative">
+                <div className="flex items-center justify-between p-4 bg-slate-900 text-white rounded-2xl mt-6 overflow-hidden relative">
                   <div className="relative z-10">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Reputation Score</span>
                     <div className="flex items-center mt-1">

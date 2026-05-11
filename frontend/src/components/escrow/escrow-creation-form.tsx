@@ -148,23 +148,26 @@ export function EscrowCreationForm() {
 
   return (
     <Card className="border">
-      <CardHeader className="bg-slate-50/30 border-b border-border/50 py-6">
+      <CardHeader className="surface-muted border-b border-border/50 py-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-lg">
+          <div className="p-2 bg-primary/10 rounded-lg shrink-0">
             <Plus className="h-5 w-5 text-primary" />
           </div>
-          <CardTitle className="font-heading text-2xl font-bold text-slate-900">Protocol Deployment</CardTitle>
+          <CardTitle className="font-heading text-xl sm:text-2xl font-bold text-foreground">Protocol Deployment</CardTitle>
         </div>
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Configure Smart Verification Parameters</p>
+        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-1">Configure Smart Verification Parameters</p>
       </CardHeader>
-      <CardContent className="p-8 space-y-8">
-        <div className="grid grid-cols-3 gap-4">
+      <CardContent className="card-padding space-y-8">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {['Parameters', 'Milestones', 'Final Audit'].map((label, index) => (
-            <div key={label} className={`relative rounded-2xl border p-4 transition-all duration-300 ${step === index + 1 ? 'border-primary bg-primary/5 shadow-sm' : 'border-slate-100 bg-slate-50/50 opacity-60'} `}>
-              <p className="text-[10px] font-bold uppercase tracking-[.24em] text-slate-400">Node {index + 1}</p>
-              <p className={cn("font-bold font-heading mt-1", step === index + 1 ? "text-primary" : "text-slate-600")}>{label}</p>
+            <div key={label} className={cn(
+              "relative rounded-2xl border p-3 sm:p-4 transition-all duration-300",
+              step === index + 1 ? "border-primary bg-primary/5 shadow-sm" : "border-border bg-muted/30 opacity-60"
+            )}>
+              <p className="text-[10px] font-bold uppercase tracking-[.24em] text-muted-foreground">Node {index + 1}</p>
+              <p className={cn("font-bold font-heading mt-1 text-sm sm:text-base", step === index + 1 ? "text-primary" : "text-foreground")}>{label}</p>
               {step > index + 1 && (
-                <CheckCircle className="absolute top-4 right-4 h-4 w-4 text-emerald-500" />
+                <CheckCircle className="absolute top-3 right-3 h-4 w-4 text-emerald-500" />
               )}
             </div>
           ))}
@@ -174,14 +177,14 @@ export function EscrowCreationForm() {
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="title" className="text-xs font-bold uppercase tracking-wider text-slate-500">Contract Title</Label>
-                <Input id="title" placeholder="Protocol: Website Redesign Execution" {...register("title")} className="h-12 rounded-xl bg-white/50 border-slate-200 focus:ring-primary/20" />
+                <Label htmlFor="title" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Contract Title</Label>
+                <Input id="title" placeholder="Protocol: Website Redesign Execution" {...register("title")} className="h-12 rounded-xl" />
                 {errors.title && <p className="text-[10px] font-bold text-rose-500 uppercase mt-1">{errors.title.message}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="workerId" className="text-xs font-bold uppercase tracking-wider text-slate-500">Execution Node (Worker)</Label>
-                <select id="workerId" {...register("workerId")} className="w-full h-12 rounded-xl border border-slate-200 bg-white/50 px-3 py-2 text-sm outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none font-medium">
+                <Label htmlFor="workerId" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Execution Node (Worker)</Label>
+                <select id="workerId" {...register("workerId")} className="w-full h-12 rounded-xl border border-input bg-background px-3 py-2 text-sm outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none font-medium">
                   <option value="">Select Talent Node</option>
                   {workersQuery.data?.map((worker) => (
                     <option key={worker.id} value={worker.id}>
@@ -194,31 +197,31 @@ export function EscrowCreationForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-xs font-bold uppercase tracking-wider text-slate-500">Project Specifications</Label>
-              <Textarea id="description" placeholder="Define the algorithmic scope, required deliverables, and technical expectations." {...register("description")} className="min-h-[160px] rounded-2xl bg-white/50 border-slate-200 focus:ring-primary/20 p-4" />
+              <Label htmlFor="description" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Project Specifications</Label>
+              <Textarea id="description" placeholder="Define the algorithmic scope, required deliverables, and technical expectations." {...register("description")} className="min-h-[160px] rounded-2xl p-4" />
               {errors.description && <p className="text-[10px] font-bold text-rose-500 uppercase mt-1">{errors.description.message}</p>}
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-wider text-slate-500">Total Committed Capital</Label>
+                <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Total Committed Capital</Label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
-                  <Input id="amount" type="number" min="0" step="0.01" {...register("amount", { valueAsNumber: true })} className="h-12 pl-8 rounded-xl bg-white/50 border-slate-200 focus:ring-primary/20 font-bold" />
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-bold">$</span>
+                  <Input id="amount" type="number" min="0" step="0.01" {...register("amount", { valueAsNumber: true })} className="h-12 pl-8 rounded-xl font-bold" />
                 </div>
                 {errors.amount && <p className="text-[10px] font-bold text-rose-500 uppercase mt-1">{errors.amount.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="currency" className="text-xs font-bold uppercase tracking-wider text-slate-500">Settlement Asset</Label>
-                <select id="currency" {...register("currency")} className="w-full h-12 rounded-xl border border-slate-200 bg-white/50 px-3 py-2 text-sm outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none font-bold">
+                <Label htmlFor="currency" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Settlement Asset</Label>
+                <select id="currency" {...register("currency")} className="w-full h-12 rounded-xl border border-input bg-background px-3 py-2 text-sm outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none font-bold">
                   <option value="USD">USD (Fiat Peg)</option>
                   <option value="ETH">ETH (Native)</option>
                   <option value="USDC">USDC (Stable)</option>
                 </select>
               </div>
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-slate-500">Capital Summary</Label>
-                <div className="h-12 rounded-xl border border-primary/10 bg-primary/5 flex items-center px-4">
+              <div className="space-y-2 md:col-span-1 col-span-3 md:col-auto">
+                <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Capital Summary</Label>
+                <div className="h-12 rounded-xl border border-primary/20 bg-primary/5 flex items-center px-4">
                   <span className="text-lg font-bold font-heading text-primary">${selectedAmount.toLocaleString(undefined, {maximumFractionDigits: 2})}</span>
                 </div>
               </div>
@@ -349,22 +352,22 @@ export function EscrowCreationForm() {
           </div>
         )}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between pt-6 border-t border-slate-100">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between pt-6 border-t border-border">
           <div className="flex gap-3">
             {step > 1 && (
-              <Button type="button" variant="outline" onClick={handleBack} disabled={isSubmitting} className="h-12 px-8 rounded-xl font-bold text-xs uppercase tracking-widest border-slate-200">
+              <Button type="button" variant="outline" onClick={handleBack} disabled={isSubmitting} className="h-12 px-8 rounded-xl font-bold text-xs uppercase tracking-widest">
                 Back
               </Button>
             )}
             {step < 3 && (
-              <Button type="button" onClick={handleNext} className="h-12 px-8 bg-slate-900 text-white hover:bg-slate-800 rounded-xl font-bold text-xs uppercase tracking-widest">
+              <Button type="button" onClick={handleNext} className="h-12 px-8 rounded-xl font-bold text-xs uppercase tracking-widest">
                 Continue Execution
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             )}
           </div>
           {step === 3 && (
-            <Button type="button" onClick={handleSubmit(onSubmit)} disabled={isSubmitting || createEscrowMutation.isPending} className="h-12 px-10 bg-primary text-white hover:bg-primary/90 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-primary/20 transition-all">
+            <Button type="button" onClick={handleSubmit(onSubmit)} disabled={isSubmitting || createEscrowMutation.isPending} className="h-12 px-10 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-bold text-xs uppercase tracking-widest">
               {createEscrowMutation.isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />

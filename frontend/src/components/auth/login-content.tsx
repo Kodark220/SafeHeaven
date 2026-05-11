@@ -145,14 +145,14 @@ export function LoginContent() {
                 {/* Client Role */}
                 <button
                   onClick={() => handleSelectRole("client")}
-                  className="w-full p-4 border rounded-lg hover:bg-muted transition-colors text-left"
+                  className="w-full p-4 border border-border rounded-lg hover:bg-accent transition-colors text-left group"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
+                    <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
                       <Briefcase className="w-5 h-5 text-primary" />
                     </div>
-                    <div>
-                      <p className="font-medium">Client</p>
+                    <div className="min-w-0">
+                      <p className="font-medium text-foreground">Client</p>
                       <p className="text-xs text-muted-foreground">Create and manage escrow contracts</p>
                     </div>
                   </div>
@@ -161,14 +161,14 @@ export function LoginContent() {
                 {/* Worker Role */}
                 <button
                   onClick={() => handleSelectRole("worker")}
-                  className="w-full p-4 border rounded-lg hover:bg-muted transition-colors text-left"
+                  className="w-full p-4 border border-border rounded-lg hover:bg-accent transition-colors text-left group"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-950 rounded-lg">
+                    <div className="p-2 bg-blue-500/10 dark:bg-blue-950/20 rounded-lg group-hover:bg-blue-500/20 transition-colors">
                       <Zap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <div>
-                      <p className="font-medium">Worker</p>
+                    <div className="min-w-0">
+                      <p className="font-medium text-foreground">Worker</p>
                       <p className="text-xs text-muted-foreground">Complete milestones and earn</p>
                     </div>
                   </div>
@@ -177,14 +177,14 @@ export function LoginContent() {
                 {/* AI Agent Role */}
                 <button
                   onClick={() => handleSelectRole("agent")}
-                  className="w-full p-4 border rounded-lg hover:bg-muted transition-colors text-left"
+                  className="w-full p-4 border border-border rounded-lg hover:bg-accent transition-colors text-left group"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="p-2 bg-purple-100 dark:bg-purple-950 rounded-lg">
+                    <div className="p-2 bg-purple-500/10 dark:bg-purple-950/20 rounded-lg group-hover:bg-purple-500/20 transition-colors">
                       <Shield className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <div>
-                      <p className="font-medium">AI Agent</p>
+                    <div className="min-w-0">
+                      <p className="font-medium text-foreground">AI Agent</p>
                       <p className="text-xs text-muted-foreground">Verify milestones with AI analysis</p>
                     </div>
                   </div>
